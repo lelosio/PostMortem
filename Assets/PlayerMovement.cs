@@ -52,25 +52,24 @@ public class PlayerMovement : MonoBehaviour
 
         #endregion
 
-        #region Handles HeadBob
-            if (moveY > 0.1)
-            {
-                playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, -5f), Time.deltaTime / 0.1f);
-            }
-            else 
-            {
-                playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 0), Time.deltaTime / 0.1f);
-            }
-            if (moveY < -0.1)
-            {
-                playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 5f), Time.deltaTime / 0.1f);
-            }
-            else
-            {
-                playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 0), Time.deltaTime / 0.1f);
-            }
-
-        #endregion
+        // #region Handles HeadBob
+        //     if (moveY > 0.1)
+        //     {
+        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, -5f), Time.deltaTime / 0.1f);
+        //     }
+        //     else 
+        //     {
+        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 0), Time.deltaTime / 0.1f);
+        //     }
+        //     if (moveY < -0.1)
+        //     {
+        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 5f), Time.deltaTime / 0.1f);
+        //     }
+        //     else
+        //     {
+        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 0), Time.deltaTime / 0.1f);
+        //     }
+        // #endregion
 
         #region Handles movement
         inputVector = new Vector3(moveY, 0f , moveX);
