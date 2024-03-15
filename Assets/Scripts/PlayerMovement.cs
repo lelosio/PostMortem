@@ -1,3 +1,5 @@
+using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -26,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Camera playerCamera;
 
+    private Quaternion currentSlerp;
+    private Quaternion AddQuaternion;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -47,32 +52,34 @@ public class PlayerMovement : MonoBehaviour
             transform.localRotation = Quaternion.AngleAxis(currentLookingPos, transform.up);
 
             yMousePos += -Input.GetAxis("Mouse Y") * sensitivity;
-            yMousePos = Mathf.Clamp(yMousePos, -50, 50);
-            playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, 0);
+            yMousePos = Mathf.Clamp(yMousePos, -70, 70);
+            // playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, 0);
 
         #endregion
 
-        // #region Handles HeadBob
-        //     if (moveY > 0.1)
-        //     {
-        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, -5f), Time.deltaTime / 0.1f);
-        //     }
-        //     else 
-        //     {
-        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 0), Time.deltaTime / 0.1f);
-        //     }
-        //     if (moveY < -0.1)
-        //     {
-        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 5f), Time.deltaTime / 0.1f);
-        //     }
-        //     else
-        //     {
-        //         playerCamera.transform.localRotation = Quaternion.Slerp(playerCamera.transform.localRotation, Quaternion.Euler(playerCamera.transform.localRotation.x, playerCamera.transform.localRotation.y, 0), Time.deltaTime / 0.1f);
-        //     }
-        // #endregion
+        #region Handles HeadBob
+            if (Mathf.Abs(moveY) > 0.1f)
+            {
+                if (moveY > 0)
+                {
+                    AddQuaternion = Quaternion.Euler(0, 0, -5f);
+                }
+                else
+                {
+                    AddQuaternion = Quaternion.Euler(0, 0, 5f);
+                }
+            }
+            else
+            {
+                AddQuaternion = Quaternion.Euler(0, 0, 0);
+            }
+            currentSlerp = Quaternion.Slerp(playerCamera.transform.localRotation,AddQuaternion, Time.deltaTime / 0.1f);
+            playerCamera.transform.localRotation = Quaternion.Euler(yMousePos,0, currentSlerp.eulerAngles.z);
+
+        #endregion
 
         #region Handles movement
-        inputVector = new Vector3(moveY, 0f , moveX);
+            inputVector = new Vector3(moveY, 0f , moveX);
             inputVector.Normalize();
             inputVector = transform.TransformDirection(inputVector);
 
