@@ -101,9 +101,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 218
-        height: 168
+        y: 1
+        width: 219
+        height: 167
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,7 +121,7 @@ TextureImporter:
       name: Group 7_1
       rect:
         serializedVersion: 2
-        x: 218
+        x: 219
         y: 0
         width: 218
         height: 168
@@ -142,9 +142,9 @@ TextureImporter:
       name: Group 7_2
       rect:
         serializedVersion: 2
-        x: 436
+        x: 437
         y: 0
-        width: 218
+        width: 219
         height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: Group 7_3
       rect:
         serializedVersion: 2
-        x: 654
-        y: 0
+        x: 656
+        y: 1
         width: 218
-        height: 168
+        height: 167
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Group 7_4
       rect:
         serializedVersion: 2
-        x: 872
-        y: 0
-        width: 218
-        height: 168
+        x: 874
+        y: 1
+        width: 219
+        height: 166
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: Group 7_5
       rect:
         serializedVersion: 2
-        x: 1090
-        y: 0
+        x: 1093
+        y: 2
         width: 218
-        height: 168
+        height: 165
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

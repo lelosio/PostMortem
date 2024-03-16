@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c5d9fefbe78d89242b7717ec40e89aff
+guid: f11ae99729551d34e8bbeb7d93efee9a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -58,7 +58,7 @@ TextureImporter:
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
-  flipbookColumns: 3
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: wall_0
+      name: Group 8 (2)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 128
-        height: 128
+        y: 35
+        width: 215
+        height: 163
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0b3d358e125d3e4b8b5c67f1318f363
-      internalID: 595996655
+      spriteID: edf48114b20774643a9e2937cdaeb1da
+      internalID: 719056510
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wall_1
+      name: Group 8 (2)_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 215
         y: 0
-        width: 128
-        height: 128
+        width: 136
+        height: 232
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c43504cd5a240749bb6e3f7e6b8a279
-      internalID: -868114002
+      spriteID: ac0ed01aacf1b2e45ad549dead592704
+      internalID: -1436531277
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wall_2
+      name: Group 8 (2)_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
+        x: 351
+        y: 6
+        width: 153
+        height: 221
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43ca737ef5de9454ab04550c23eca508
-      internalID: -377973133
+      spriteID: 2118bed16403f524ca95fc42bb1cc603
+      internalID: -1497745813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Group 8 (2)_3
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 33
+        width: 217
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2f878f8892ad9149b7540915b517b1a
+      internalID: 86354171
       vertices: []
       indices: 
       edges: []
@@ -162,7 +183,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b9fb7e86349cded4dba1b75b138dc3bd
+    spriteID: cd83424efe738d047a0ca440c3415a4e
     internalID: 0
     vertices: []
     indices: 
@@ -170,9 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      wall_0: 595996655
-      wall_1: -868114002
-      wall_2: -377973133
+      Group 8 (2)_0: 719056510
+      Group 8 (2)_1: -1436531277
+      Group 8 (2)_2: -1497745813
+      Group 8 (2)_3: 86354171
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
