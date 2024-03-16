@@ -1,12 +1,10 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed = 10f;
     public float momentumDamping = 5f;
-    private CharacterController myCC;
+    private CharacterController CC;
     public Animator camAnim;
     private bool isWalking;
 
@@ -23,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float fov;
     private float fovSpeed;
+
     private float moveY;
     private float moveX;
 
@@ -35,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        myCC = GetComponent<CharacterController>();
+        CC = GetComponent<CharacterController>();
     }
 
     
@@ -43,6 +42,26 @@ public class PlayerMovement : MonoBehaviour
     {
         moveY = Input.GetAxisRaw("Horizontal");
         moveX = Input.GetAxisRaw("Vertical");
+
+        #region Handles camerasway
+            if (Mathf.Abs(moveY) > 0.1f)
+            {
+                if (moveY > 0)
+                {
+                    AddQuaternion = Quaternion.Euler(0, 0, -3f);
+                }
+                else
+                {
+                    AddQuaternion = Quaternion.Euler(0, 0, 3f);
+                }
+            }
+            else
+            {
+                AddQuaternion = Quaternion.Euler(0, 0, 0);
+            }
+            currentSlerp = Quaternion.Slerp(playerCamera.transform.localRotation, AddQuaternion, Time.deltaTime / 0.1f);
+
+        #endregion
 
         #region Handles rotation
             xMousePos = Input.GetAxisRaw("Mouse X");
@@ -53,30 +72,11 @@ public class PlayerMovement : MonoBehaviour
 
             yMousePos += -Input.GetAxis("Mouse Y") * sensitivity;
             yMousePos = Mathf.Clamp(yMousePos, -70, 70);
-            // playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, 0);
+
+            playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, currentSlerp.eulerAngles.z);
 
         #endregion
 
-        #region Handles HeadBob
-            if (Mathf.Abs(moveY) > 0.1f)
-            {
-                if (moveY > 0)
-                {
-                    AddQuaternion = Quaternion.Euler(0, 0, -5f);
-                }
-                else
-                {
-                    AddQuaternion = Quaternion.Euler(0, 0, 5f);
-                }
-            }
-            else
-            {
-                AddQuaternion = Quaternion.Euler(0, 0, 0);
-            }
-            currentSlerp = Quaternion.Slerp(playerCamera.transform.localRotation,AddQuaternion, Time.deltaTime / 0.1f);
-            playerCamera.transform.localRotation = Quaternion.Euler(yMousePos,0, currentSlerp.eulerAngles.z);
-
-        #endregion
 
         #region Handles movement
             inputVector = new Vector3(moveY, 0f , moveX);
@@ -84,9 +84,9 @@ public class PlayerMovement : MonoBehaviour
             inputVector = transform.TransformDirection(inputVector);
 
             movementVector = (inputVector * playerSpeed) + (Vector3.up * myGravity);
-            myCC.Move(movementVector * Time.deltaTime);
+            CC.Move(movementVector * Time.deltaTime);
 
-            if(myCC.velocity.magnitude >0.1f)
+            if(CC.velocity.magnitude >0.1f)
             {
                 isWalking = true;
             }
@@ -99,11 +99,11 @@ public class PlayerMovement : MonoBehaviour
             camAnim.SetBool("isWalking", isWalking);
         #endregion
     
-        #region Handles FOV
+        #region Handles fov
             fov = 90f;
             fovSpeed = 0.3f;
 
-            if (moveX > 0.1 || moveX < -0.1 || moveY > 0.1 || moveY < -0.1)
+            if (Mathf.Abs(moveX) > 0.1 || Mathf.Abs(moveY) > 0.1)
             {
                 fov = 110f;
             }
