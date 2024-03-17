@@ -72,36 +72,8 @@ public class PlayerMovement : MonoBehaviour
 
             yMousePos += -Input.GetAxis("Mouse Y") * sensitivity;
             yMousePos = Mathf.Clamp(yMousePos, -70, 70);
-<<<<<<< Updated upstream
-
             playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, currentSlerp.eulerAngles.z);
-
         #endregion
-
-=======
-            // playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, 0);
-        #endregion
-
-        #region Handles HeadBob
-            if (Mathf.Abs(moveY) > 0.1f)
-            {
-                if (moveY > 0)
-                {
-                    AddQuaternion = Quaternion.Euler(0, 0, -5f);
-                }
-                else
-                {
-                    AddQuaternion = Quaternion.Euler(0, 0, 5f);
-                }
-            }
-            else
-            {
-                AddQuaternion = Quaternion.Euler(0, 0, 0);
-            }
-            currentSlerp = Quaternion.Slerp(playerCamera.transform.localRotation,AddQuaternion, Time.deltaTime / 0.1f);
-            playerCamera.transform.localRotation = Quaternion.Euler(yMousePos,0, currentSlerp.eulerAngles.z);
-        #endregion
->>>>>>> Stashed changes
 
         #region Handles movement
             inputVector = new Vector3(moveY, 0f , moveX);
