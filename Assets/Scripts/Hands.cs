@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,20 +23,17 @@ public class Hands : MonoBehaviour
     {
         xMousePos = Input.GetAxisRaw("Mouse X");
         yMousePos = Input.GetAxisRaw("Mouse Y");
-
         float offsetX = xMousePos * swayAmount;
         float offsetY = yMousePos * swayAmount;
-
         Vector3 targetPosition = new Vector3(-offsetX, -offsetY, 0f);
-        anchor.localPosition = Vector3.Lerp(anchor.localPosition, targetPosition, smooth * Time.deltaTime);
 
         if (Input.GetMouseButtonDown(0))
         {
-            gun.SetBool("isShooting", true);
+            
+            gun.Play("gunShoot");
+            targetPosition += new Vector3(1000f,1000f, 10f);
         }
-        else
-        {
-            gun.SetBool("isShooting", false);
-        }
+
+        anchor.localPosition = Vector3.Lerp(anchor.localPosition, targetPosition, smooth * Time.deltaTime);
     }
 }
