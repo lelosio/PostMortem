@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         enemyRenderer = GetComponent<SpriteRenderer>();
-        playersTransform = FindObjectOfType<PlayerMovement>().transform;
+        playersTransform = FindFirstObjectByType<PlayerMovement>().transform;
         enemyNavMeshAgent = GetComponent<NavMeshAgent>();
     }
 

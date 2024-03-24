@@ -4,7 +4,6 @@ using System.Security.Cryptography;
 
 public class GunSystem : MonoBehaviour
 {
-    // Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range;
     private float timeBetweenShots;
@@ -13,10 +12,8 @@ public class GunSystem : MonoBehaviour
     private int bulletsLeft, bulletsShot;
     public float ImpactForce = 10f;
 
-    // Bools 
     bool shooting, readyToShoot, reloading;
 
-    // Reference
     public Camera fpsCam;
     public Transform attackPoint;
     public ParticleSystem muzzleFlash;
@@ -42,7 +39,7 @@ public class GunSystem : MonoBehaviour
         if (allowButtonHold)
             shooting = Input.GetMouseButton(0);
         else
-            shooting = Input.GetMouseButtonDown(0); // Changed GetMouseButton to GetMouseButtonDown
+            shooting = Input.GetMouseButtonDown(0);
 
             
         //Shoot

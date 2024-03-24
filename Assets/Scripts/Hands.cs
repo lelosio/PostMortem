@@ -29,7 +29,6 @@ public class Hands : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            
             gun.Play("gunShoot");
             targetPosition += new Vector3(1000f,1000f, 10f);
         }
