@@ -61,7 +61,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -94,7 +96,7 @@ MonoBehaviour:
       Value: 0
       HasValue: 0
     Overlay:
-      Value: 1
+      Value: 0
       HasValue: 1
     OverlayPosition:
       Value: 0
@@ -205,7 +207,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -276,7 +280,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -420,7 +426,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -500,6 +508,13 @@ MonoBehaviour:
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers:
+  - 46fbfdf3fc43db0458918377fd40293e
+  - 2fea114e74ecf3c4f920e1d5cc1c4c40
+  - 52eb9df5db46521439908db3a29a1bbb
+  - b7716510a1f36934c87976f3a81dbf3d
+  - de700ef3f37a49b58a57ae3addf01ad9
+  - 0f8eb3f400726694eb47beb1a9f94ce8
+  - e7a046c753c3c3d4aacc91f6597f310d
   - 2c5177b11d81d824dbb064f9ac8527da
   codecChannels:
     Value: []
@@ -541,7 +556,8 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
+  MasterBanks:
+  - Master
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
@@ -560,6 +576,13 @@ MonoBehaviour:
   Platforms:
   - {fileID: -8569106564964109384}
   - {fileID: -3363516291775950024}
+  - {fileID: -8428347744446382614}
+  - {fileID: 1592782253348977610}
+  - {fileID: 2536036044226921556}
+  - {fileID: 4248713595071587868}
+  - {fileID: -8473797882347375877}
+  - {fileID: -5179079866327050241}
+  - {fileID: -8925295510093672247}
   - {fileID: -5962493512874011911}
   MigratedPlatforms: 080000001200000006000000050000000b000000000000000a000000090000000c000000150000000200000001000000
 --- !u!114 &1592782253348977610
@@ -623,7 +646,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -694,7 +719,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
@@ -838,7 +865,9 @@ MonoBehaviour:
     StaticPlugins:
       Value: []
       HasValue: 0
-    CallbackHandler: {Value: {fileID: 0}, HasValue: 0}
+    CallbackHandler:
+      Value: {fileID: 0}
+      HasValue: 0
   OutputTypeName: 
   threadAffinities:
     Value: []
