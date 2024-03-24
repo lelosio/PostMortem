@@ -1,13 +1,22 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DialogueSystem
 {
     public class DialogueHolder : MonoBehaviour
     {
+
         private void Awake()
         {
-            StartCoroutine(dialogueSequence());
+                StartCoroutine(dialogueSequence());
+        }
+
+        public void OnTriggerEnter(Collider collision) {
+            if (collision.gameObject.name == "Dialogue")
+            {
+                Debug.Log("Working");
+            }
         }
 
         private IEnumerator dialogueSequence()
