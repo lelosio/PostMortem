@@ -15,7 +15,6 @@ namespace DialogueSystem
 
         [Header("Time parameters")]
         [SerializeField] private float delay;
-        [SerializeField] private float delayBetweenLines;
 
         [Header("Sound")]
         [SerializeField] private EventReference sound;
@@ -35,7 +34,7 @@ namespace DialogueSystem
 
         private void Start()
         {
-            StartCoroutine(WriteText(input, textHolder, textColor, delay, sound, delayBetweenLines));
+            StartCoroutine(WriteText(input, textHolder, textColor, delay, sound));
         }
     }
 }
