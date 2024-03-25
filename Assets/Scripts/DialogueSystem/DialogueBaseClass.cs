@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using TMPro;
 using UnityEngine;
+using TMPro;
 using FMODUnity;
 
 namespace DialogueSystem
@@ -9,23 +9,33 @@ namespace DialogueSystem
     {
         public bool finished { get; private set; }
 
+        // private float initialDelay;
+
         protected IEnumerator WriteText(string input, TMP_Text textHolder, Color textColor, float delay, EventReference sound, float delayBetweenLines)
         {
             textHolder.ForceMeshUpdate(true);
             textHolder.color = textColor;
 
+            // initialDelay = delay;
+
+
             for (int i = 0; i < input.Length; i++)
             {
+                // if (Input.GetMouseButton(0))
+                // {
+                //     delay = 0;
+                // }
                 textHolder.text += input[i];
-                if (input[i].ToString() != " ")
+                if (input[i].ToString() != " ") // && delay != 0)
                 {
-                    FMODUnity.RuntimeManager.PlayOneShot(sound);
+                    RuntimeManager.PlayOneShot(sound);
                 }
                 yield return new WaitForSeconds(delay);
             }
 
-            //yield return new WaitForSeconds(delayBetweenLines);
+            //yield return new WaitForSeconds(delayBetweenLines);       // <--- timer delay between lines
             yield return new WaitUntil(() => Input.GetMouseButton(0));
+            // delay = initialDelay;
             finished = true;
         }
     }
