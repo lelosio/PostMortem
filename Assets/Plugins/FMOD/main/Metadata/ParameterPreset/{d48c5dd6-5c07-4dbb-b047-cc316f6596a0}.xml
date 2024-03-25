@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{d48c5dd6-5c07-4dbb-b047-cc316f6596a0}">
+		<property name="name">
+			<value>Ambience Volume Control</value>
+		</property>
+		<relationship name="folder">
+			<destination>{85e3f979-8c20-43e4-917b-b7da4d4750d1}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1dd809c9-5079-4135-b8b2-c090353eff38}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1dd809c9-5079-4135-b8b2-c090353eff38}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

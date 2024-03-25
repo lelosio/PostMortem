@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DialogueSystem
@@ -7,16 +6,14 @@ namespace DialogueSystem
     public class DialogueHolder : MonoBehaviour
     {
 
-        private void Awake()
+        private void Start()
         {
-                StartCoroutine(dialogueSequence());
+            gameObject.SetActive(false);
         }
 
-        public void OnTriggerEnter(Collider collision) {
-            if (collision.gameObject.name == "Dialogue")
-            {
-                Debug.Log("Working");
-            }
+        private void Awake()
+        {
+            StartCoroutine(dialogueSequence());
         }
 
         private IEnumerator dialogueSequence()

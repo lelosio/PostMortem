@@ -54,7 +54,12 @@
         "ProjectSettings/": true,
         "UserSettings/": true,
         "temp/": true,
-        "Temp/": true
+        "Temp/": true,
+        "**/*.rar": true,
+        "**/*.log": true,
+        "**/Settings/": true,
+        "**/Scenes/": true,
+        "**/Packages/": true
     },
     "dotnet.defaultSolution": "3.sln"
 }
