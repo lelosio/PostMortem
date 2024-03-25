@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float momentumDamping = 5f;
     private CharacterController CC;
     public Animator camAnim;
-    private bool isWalking;
+    public bool isWalking;
 
     private Vector3 inputVector;
     private Vector3 movementVector;
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             movementVector = (inputVector * playerSpeed) + (Vector3.up * myGravity);
             CC.Move(movementVector * Time.deltaTime);
 
-            if(CC.velocity.magnitude >0.1f)
+            if(CC.velocity.magnitude > 0.1f)
             {
                 isWalking = true;
             }

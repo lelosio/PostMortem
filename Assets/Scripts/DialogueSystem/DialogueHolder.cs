@@ -1,22 +1,42 @@
 ﻿using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace DialogueSystem
 {
     public class DialogueHolder : MonoBehaviour
     {
+        public GameObject UI;
+        public GameObject hands;
+        public PlayerMovement movement;
+        public Camera playerCam;
+        public Vector3 cutscenePos;
+        public Vector3 cutsceneRot;
 
-        private void Start()
+        private void OnEnable()
         {
-            gameObject.SetActive(false);
+            LockPlayer();
+            StartCoroutine(DialogueSequence());
         }
 
-        private void Awake()
+        private void LockPlayer()
         {
-            StartCoroutine(dialogueSequence());
+            hands.SetActive(false);
+            UI.SetActive(false);
+            movement.camAnim.SetBool("isWalking", false);
+            movement.enabled = false;
+            playerCam.transform.position = cutscenePos;
+            playerCam.transform.rotation = Quaternion.Euler(cutsceneRot);
         }
 
-        private IEnumerator dialogueSequence()
+        private void UnlockPlayer()
+        {
+            hands.SetActive(true);
+            UI.SetActive(true);
+            movement.enabled = true;
+        }
+
+        private IEnumerator DialogueSequence()
         {
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -24,7 +44,9 @@ namespace DialogueSystem
                 transform.GetChild(i).gameObject.SetActive(true);
                 yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
             }
+
             gameObject.SetActive(false);
+            UnlockPlayer();
         }
 
         private void Deactivate()
