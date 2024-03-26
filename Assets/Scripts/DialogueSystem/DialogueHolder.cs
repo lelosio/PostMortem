@@ -26,6 +26,7 @@ namespace DialogueSystem
             movement.enabled = false;
             playerCam.transform.position = cutscenePos;
             playerCam.transform.rotation = Quaternion.Euler(cutsceneRot);
+            playerCam.fieldOfView = 10f;
         }
 
         private void UnlockPlayer()

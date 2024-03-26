@@ -1,16 +1,21 @@
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerSpeed = 10f;
-    public float momentumDamping = 5f;
     private CharacterController CC;
+    public Camera playerCamera;
     public Animator camAnim;
-    public bool isWalking;
+
+    public EventReference footstep;
 
     private Vector3 inputVector;
     private Vector3 movementVector;
+
+    public bool isWalking;
     private float myGravity = -10f;
+    public float playerSpeed = 10f;
+    public float momentumDamping = 5f;
 
     public float sensitivity = 1.5f;
     public float smoothing = 1.5f;
@@ -19,13 +24,14 @@ public class PlayerMovement : MonoBehaviour
     private float smoothedMousePos;
     private float currentLookingPos;
 
+    private float time;
+
     private float fov;
     private float fovSpeed;
 
     private float moveY;
     private float moveX;
 
-    public Camera playerCamera;
 
     private Quaternion currentSlerp;
     private Quaternion AddQuaternion;
@@ -108,5 +114,14 @@ public class PlayerMovement : MonoBehaviour
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, fov, Time.deltaTime / fovSpeed);
         #endregion
 
+        #region Handles footsteps
+            if (Time.time > time)
+            {
+                time = Time.time + 0.3f;
+                float currentSpeed = CC.velocity.magnitude;
+                if (currentSpeed < 3f) return;
+                RuntimeManager.PlayOneShot(footstep, this.gameObject.transform.localPosition + new Vector3(0, -3, 0));
+            }
+        #endregion
     }
 }
