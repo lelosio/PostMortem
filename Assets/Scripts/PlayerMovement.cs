@@ -1,5 +1,8 @@
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,9 +35,12 @@ public class PlayerMovement : MonoBehaviour
     private float moveY;
     private float moveX;
 
+    public float Health = 10f;
 
     private Quaternion currentSlerp;
     private Quaternion AddQuaternion;
+    public GameObject panel;
+
 
     void Start()
     {
@@ -43,85 +49,104 @@ public class PlayerMovement : MonoBehaviour
         CC = GetComponent<CharacterController>();
     }
 
-    
+
     void Update()
     {
         moveY = Input.GetAxisRaw("Horizontal");
         moveX = Input.GetAxisRaw("Vertical");
 
         #region Handles camerasway
-            if (Mathf.Abs(moveY) > 0.1f)
+        if (Mathf.Abs(moveY) > 0.1f)
+        {
+            if (moveY > 0)
             {
-                if (moveY > 0)
-                {
-                    AddQuaternion = Quaternion.Euler(0, 0, -3f);
-                }
-                else
-                {
-                    AddQuaternion = Quaternion.Euler(0, 0, 3f);
-                }
+                AddQuaternion = Quaternion.Euler(0, 0, -3f);
             }
             else
             {
-                AddQuaternion = Quaternion.Euler(0, 0, 0);
+                AddQuaternion = Quaternion.Euler(0, 0, 3f);
             }
-            currentSlerp = Quaternion.Slerp(playerCamera.transform.localRotation, AddQuaternion, Time.deltaTime / 0.1f);
+        }
+        else
+        {
+            AddQuaternion = Quaternion.Euler(0, 0, 0);
+        }
+        currentSlerp = Quaternion.Slerp(playerCamera.transform.localRotation, AddQuaternion, Time.deltaTime / 0.1f);
 
         #endregion
 
         #region Handles rotation
-            xMousePos = Input.GetAxisRaw("Mouse X");
-            xMousePos *= sensitivity * smoothing;
-            smoothedMousePos = Mathf.Lerp(smoothedMousePos, xMousePos, 1f / smoothing);
-            currentLookingPos += smoothedMousePos;
-            transform.localRotation = Quaternion.AngleAxis(currentLookingPos, transform.up);
+        xMousePos = Input.GetAxisRaw("Mouse X");
+        xMousePos *= sensitivity * smoothing;
+        smoothedMousePos = Mathf.Lerp(smoothedMousePos, xMousePos, 1f / smoothing);
+        currentLookingPos += smoothedMousePos;
+        transform.localRotation = Quaternion.AngleAxis(currentLookingPos, transform.up);
 
-            yMousePos += -Input.GetAxis("Mouse Y") * sensitivity;
-            yMousePos = Mathf.Clamp(yMousePos, -70, 70);
-            playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, currentSlerp.eulerAngles.z);
+        yMousePos += -Input.GetAxis("Mouse Y") * sensitivity;
+        yMousePos = Mathf.Clamp(yMousePos, -70, 70);
+        playerCamera.transform.localRotation = Quaternion.Euler(yMousePos, 0, currentSlerp.eulerAngles.z);
         #endregion
 
         #region Handles movement
-            inputVector = new Vector3(moveY, 0f , moveX);
-            inputVector.Normalize();
-            inputVector = transform.TransformDirection(inputVector);
+        inputVector = new Vector3(moveY, 0f, moveX);
+        inputVector.Normalize();
+        inputVector = transform.TransformDirection(inputVector);
 
-            movementVector = (inputVector * playerSpeed) + (Vector3.up * myGravity);
-            CC.Move(movementVector * Time.deltaTime);
+        movementVector = (inputVector * playerSpeed) + (Vector3.up * myGravity);
+        CC.Move(movementVector * Time.deltaTime);
 
-            if(CC.velocity.magnitude > 0.1f)
-            {
-                isWalking = true;
-            }
-            else
-            {
-                inputVector = Vector3.Lerp(inputVector, Vector3.zero, momentumDamping * Time.deltaTime);
-                isWalking = false;
-            }
+        if (CC.velocity.magnitude > 0.1f)
+        {
+            isWalking = true;
+        }
+        else
+        {
+            inputVector = Vector3.Lerp(inputVector, Vector3.zero, momentumDamping * Time.deltaTime);
+            isWalking = false;
+        }
 
-            camAnim.SetBool("isWalking", isWalking);
+        camAnim.SetBool("isWalking", isWalking);
         #endregion
-    
+
         #region Handles fov
-            fov = 90f;
-            fovSpeed = 0.3f;
+        fov = 90f;
+        fovSpeed = 0.3f;
 
-            if (Mathf.Abs(moveX) > 0.1 || Mathf.Abs(moveY) > 0.1)
-            {
-                fov = 110f;
-            }
+        if (Mathf.Abs(moveX) > 0.1 || Mathf.Abs(moveY) > 0.1)
+        {
+            fov = 110f;
+        }
 
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, fov, Time.deltaTime / fovSpeed);
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, fov, Time.deltaTime / fovSpeed);
         #endregion
 
         #region Handles footsteps
-            if (Time.time > time)
-            {
-                time = Time.time + 0.3f;
-                float currentSpeed = CC.velocity.magnitude;
-                if (currentSpeed < 3f) return;
-                RuntimeManager.PlayOneShot(footstep, this.gameObject.transform.localPosition + new Vector3(0, -3, 0));
-            }
+        if (Time.time > time)
+        {
+            time = Time.time + 0.3f;
+            float currentSpeed = CC.velocity.magnitude;
+            if (currentSpeed < 3f) return;
+            RuntimeManager.PlayOneShot(footstep, this.gameObject.transform.localPosition + new Vector3(0, -3, 0));
+        }
         #endregion
+
+        
+        if(Health <= 0)
+        {
+            Die();
+        }
+    }
+    public void Die()
+    {
+        Destroy(gameObject);
+        panel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        Health -= damageAmount;
+        Debug.Log(damageAmount);
     }
 }

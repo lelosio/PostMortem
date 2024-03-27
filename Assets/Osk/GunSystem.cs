@@ -1,55 +1,55 @@
 using UnityEngine;
 using TMPro;
-using System.Security.Cryptography;
 
 public class GunSystem : MonoBehaviour
 {
+    //Gun stats
     public int damage;
-    public float timeBetweenShooting, spread, range;
-    private float timeBetweenShots;
+    public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
-    private int bulletsLeft, bulletsShot;
-    public float ImpactForce = 10f;
+    int bulletsLeft, bulletsShot;
 
+    //bools 
     bool shooting, readyToShoot, reloading;
 
+    //Reference
     public Camera fpsCam;
     public Transform attackPoint;
-    public ParticleSystem muzzleFlash;
-    public GameObject hitEffect;
+    public RaycastHit rayHit;
+    public LayerMask whatIsEnemy;
+
+    //Graphics
+    public GameObject muzzleFlash, bulletHoleGraphic;
+    public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI text;
 
-    
     private void Awake()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
     }
-
-    public void Update()
+    private void Update()
     {
-        text.SetText(bulletsLeft + "/" + 0);
         MyInput();
+
+        //SetText
+        text.SetText(bulletsLeft + " / " + magazineSize);
     }
-
-
     private void MyInput()
     {
-        if (allowButtonHold)
-            shooting = Input.GetMouseButton(0);
-        else
-            shooting = Input.GetMouseButtonDown(0);
+        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+        else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-            
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
+
         //Shoot
-        if (readyToShoot && shooting && bulletsLeft > 0)
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = bulletsPerTap;
             Shoot();
         }
     }
-
     private void Shoot()
     {
         readyToShoot = false;
@@ -57,56 +57,44 @@ public class GunSystem : MonoBehaviour
         //Spread
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
-        Vector3 direction = fpsCam.transform.forward;
 
-        //rotacja rozrzutu
-        direction += fpsCam.transform.right * x;
-        direction += fpsCam.transform.up * y;
+        //Calculate Direction with Spread
+        Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
 
-        muzzleFlash.Play();
-
-        // Draw the raycast
-        Debug.DrawRay(fpsCam.transform.position, direction * range, Color.red, 0.1f);
-
-        // Raycast
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, direction, out hit, range))
+        //RayCast
+        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
         {
-            Debug.Log(hit.transform.name);
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
-            PlayerMovement player = hit.transform.GetComponent<PlayerMovement>();
-            if (enemy != null)
-            {
-                enemy.TakeDamage(damage);
-            }
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * ImpactForce);
-            }
-            GameObject ImpactGo = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(ImpactGo, 2f);
+            Debug.Log(rayHit.collider.name);
 
-            // Pause the game
-            //Time.timeScale = 0f;
+            if (rayHit.collider.CompareTag("Enemy")) ;
         }
 
-        bulletsShot--; 
+        //ShakeCamera
+
+        //Graphics
+        Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+        Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+
+        bulletsLeft--;
+        bulletsShot--;
+
+        Invoke("ResetShot", timeBetweenShooting);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
-        else
-            Invoke("ResetShot", timeBetweenShooting);
-
-        bulletsLeft--;
     }
-
-
-
-
-
-
     private void ResetShot()
     {
         readyToShoot = true;
+    }
+    private void Reload()
+    {
+        reloading = true;
+        Invoke("ReloadFinished", reloadTime);
+    }
+    private void ReloadFinished()
+    {
+        bulletsLeft = magazineSize;
+        reloading = false;
     }
 }
