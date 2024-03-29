@@ -629,7 +629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -171685994, guid: de7c745242e2b50408a7ec75a06b25bd, type: 3}
+  m_Sprite: {fileID: 1193500071, guid: 3d1b1dbda0a89d04c84f556901ff0b62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -919,7 +919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 678.87, y: -360.1}
+  m_AnchoredPosition: {x: 586.68, y: -360.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &249621201
@@ -942,7 +942,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 11/18
+  m_text: 0/0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a9821c4c62687241b8ab1f38c6789e5, type: 2}
   m_sharedMaterial: {fileID: 6135089590490645530, guid: 2a9821c4c62687241b8ab1f38c6789e5,
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1168,7 +1168,7 @@ MonoBehaviour:
       Data2: 1128618335
       Data3: 1523145372
       Data4: -452777997
-    Path: event:/beep2
+    Path: event:/Beeps/beep2
   characterSprite: {fileID: -1780146106, guid: 733842bbb4b48b24da584064157fcecc, type: 3}
   imageHolder: {fileID: 941662199}
 --- !u!114 &288746370
@@ -12888,12 +12888,27 @@ MonoBehaviour:
   destroyDelay: 10
   pistolAnim: {fileID: 9100000, guid: fe3a248c6b6ad9540b007bf68777d017, type: 2}
   shotgunAnim: {fileID: 9100000, guid: ace62504ce38826489a4f2c517146603, type: 2}
+  crosshair: {fileID: 2102274949}
   hand: {fileID: 1650564792}
   muzzleFlash: {fileID: 215615230}
   muzzleFlashAnimator: {fileID: 215615232}
   muzzleFlashLight: {fileID: 215615234}
   muzzleFlashFlash: {fileID: 919531666}
   gunImpact: {fileID: 233496334447880256}
+  gunShot:
+    Guid:
+      Data1: -502191883
+      Data2: 1229073567
+      Data3: -26026078
+      Data4: -1393749318
+    Path: event:/shoot
+  emptyClip:
+    Guid:
+      Data1: 1105878743
+      Data2: 1309464980
+      Data3: -1467342159
+      Data4: -914367888
+    Path: event:/emptyClip
   ammoUI: {fileID: 249621201}
 --- !u!1 &890889862
 GameObject:
@@ -25070,7 +25085,7 @@ MonoBehaviour:
       Data2: 1275180414
       Data3: -1154422395
       Data4: -342097783
-    Path: event:/beep
+    Path: event:/Beeps/beep
   characterSprite: {fileID: 21300000, guid: b3a4de37562efa24581361234a871556, type: 3}
   imageHolder: {fileID: 1561195320}
 --- !u!114 &1973576710
@@ -30521,6 +30536,8 @@ GameObject:
   - component: {fileID: 2102274946}
   - component: {fileID: 2102274948}
   - component: {fileID: 2102274947}
+  - component: {fileID: 2102274950}
+  - component: {fileID: 2102274949}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -30554,7 +30571,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102274945}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -30567,7 +30584,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c95e1f13208d96a4aa2df2995a843d58, type: 3}
+  m_Sprite: {fileID: -2062074794, guid: aeafb519224d9c3428bc8339a7fd672b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30575,7 +30592,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2102274948
 CanvasRenderer:
@@ -30585,6 +30602,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102274945}
   m_CullTransparentMesh: 1
+--- !u!95 &2102274949
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102274945}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3c4c958c696f8f42a8308c93de5ae28, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!212 &2102274950
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102274945}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -2062074794, guid: aeafb519224d9c3428bc8339a7fd672b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.05, y: 0.05}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2124247261
 GameObject:
   m_ObjectHideFlags: 0
@@ -30645,7 +30738,7 @@ MonoBehaviour:
       Data2: 1128618335
       Data3: 1523145372
       Data4: -452777997
-    Path: event:/beep2
+    Path: event:/Beeps/beep2
   characterSprite: {fileID: -1780146106, guid: 733842bbb4b48b24da584064157fcecc, type: 3}
   imageHolder: {fileID: 524061880}
 --- !u!114 &2124247264
