@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
-                playerScript.TakeDamage(damage);
+                // playerScript.TakeDamage(damage);
                 lastShotTime = Time.time; 
             }
         }

@@ -1,8 +1,5 @@
 using UnityEngine;
 using FMODUnity;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -40,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     private Quaternion currentSlerp;
     private Quaternion AddQuaternion;
     public GameObject panel;
-
 
     void Start()
     {

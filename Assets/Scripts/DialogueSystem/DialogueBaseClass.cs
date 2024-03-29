@@ -23,7 +23,7 @@ namespace DialogueSystem
                 //     delay = 0;
                 // }
                 textHolder.text += input[i];
-                if (input[i].ToString() != " ") // && delay != 0)
+                if (input[i] != ' ') // && delay != 0)
                 {
                     RuntimeManager.PlayOneShot(sound);
                 }
