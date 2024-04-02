@@ -62,3 +62,7 @@ UpgradeLog.htm
 /Assets/FMODStudioCache.meta
 fmod.log
 fmod_editor.log
+
+
+/Assets/Plugins/FMOD/platforms/**/lib/
+!/Assets/Plugins/FMOD/platforms/win/lib/
