@@ -66,3 +66,5 @@ fmod_editor.log
 
 /Assets/Plugins/FMOD/platforms/**/lib/
 !/Assets/Plugins/FMOD/platforms/win/lib/
+/Assets/Plugins/FMOD/platforms/**/lib.meta
+!/Assets/Plugins/FMOD/platforms/win/lib.meta
