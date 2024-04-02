@@ -32,11 +32,13 @@ public class PlayerMovement : MonoBehaviour
     private float moveY;
     private float moveX;
 
-    public float Health = 10f;
-
     private Quaternion currentSlerp;
     private Quaternion AddQuaternion;
+
+    // oskar
+    public float Health = 10f;
     public GameObject panel;
+    public SpriteRenderer bloodOverlay;
 
     void Start()
     {
@@ -126,12 +128,16 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        
         if(Health <= 0)
         {
             Die();
         }
+        
+        float newOpacity = 1f - (Health / 100);
+
+        bloodOverlay.SetSpriteTransparency(Mathf.Lerp(bloodOverlay.color.a, newOpacity, Time.deltaTime * 5f));
     }
+
     public void Die()
     {
         Destroy(gameObject);
@@ -143,6 +149,5 @@ public class PlayerMovement : MonoBehaviour
     public void TakeDamage(float damageAmount)
     {
         Health -= damageAmount;
-        Debug.Log(damageAmount);
     }
 }

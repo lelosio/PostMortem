@@ -2,7 +2,6 @@ using UnityEditor.Animations;
 using UnityEngine;
 using TMPro;
 using FMODUnity;
-using Microsoft.Unity.VisualStudio.Editor;
 
 public class Hands : MonoBehaviour
 {
@@ -30,7 +29,8 @@ public class Hands : MonoBehaviour
     public Light muzzleFlashFlash;
     public ParticleSystem gunImpact;
 
-    public EventReference gunShot;
+    public EventReference pistolShot;
+    public EventReference shotgunShot;
     public EventReference emptyClip;
 
     int selectedGun;
@@ -54,8 +54,10 @@ public class Hands : MonoBehaviour
         public int pellets;
         public float shootingCooldown;
         public float reloadTime;
+        public EventReference shootSound;
+        public float damage;
 
-        public Gun(string Name, int Ammo, int MagSize, float Spread, float ReloadTime, float ShootingCooldown, AnimatorController AC, bool Acquired, int Pellets = 1)
+        public Gun(string Name, int Ammo, int MagSize, float Spread, float ReloadTime, float ShootingCooldown, float Damage, AnimatorController AC, EventReference ShootSound, bool Acquired, int Pellets = 1)
         {
             name = Name;
             ammo = Ammo;
@@ -70,15 +72,19 @@ public class Hands : MonoBehaviour
             bulletsLeft = magSize;
 
             pellets = Pellets;
+
+            shootSound = ShootSound;
+
+            damage = Damage;
         }
     }
     
     void Start()
     {
-        Gun pistol = new Gun("Pistol", 24, 12, 0f, 0.25f, 0.2f, pistolAnim, true);
-        Gun shotgun = new Gun("Shotgun", 10, 3, 0.1f, 0.5f, 0.5f, shotgunAnim, true, 6);
-        Gun submachineGun = new Gun("Pistol", 300, 12, 1.2f, 0.5f, 1f, null, false);
-        Gun machineGun = new Gun("Pistol", 400, 12, 1.2f, 0.5f, 1f, null, false);
+        Gun pistol = new Gun("Pistol", 24, 12, 0f, 0.25f, 0.2f, 30f, pistolAnim, pistolShot, true);
+        Gun shotgun = new Gun("Shotgun", 10, 3, 0.1f, 0.5f, 0.5f, 10f, shotgunAnim, shotgunShot, true, 6);
+        Gun submachineGun = new Gun("Pistol", 300, 12, 1.2f, 0.5f, 1f, 1f, null, pistolShot, false);
+        Gun machineGun = new Gun("Pistol", 400, 12, 1.2f, 0.5f, 1f, 1f, null, pistolShot, false);
 
         Inventory[0] = pistol;
         Inventory[1] = shotgun;
@@ -168,7 +174,7 @@ public class Hands : MonoBehaviour
         muzzleFlashLight.intensity = Mathf.Lerp(lightIntensity,0f, Time.deltaTime * 10f);
         muzzleFlashFlash.intensity = Mathf.Lerp(flashIntensity,0f, Time.deltaTime * 15f);
 
-        uim.ammo.text = $"{equippedGun.bulletsLeft}<color=#d9d9d9><size=60%>/{equippedGun.ammo}<br>{equippedGun.name}";
+        uim.ammo.text = $"<color=#ffffff>{equippedGun.bulletsLeft}<color=#d9d9d9><size=60%>/{equippedGun.ammo}<br><color=#ffffff>{equippedGun.name}";
     }
 
     void Shoot()
@@ -183,7 +189,7 @@ public class Hands : MonoBehaviour
         flashIntensity = 0.3f;
         lightIntensity = 300f;
 
-        RuntimeManager.PlayOneShot(gunShot);
+        RuntimeManager.PlayOneShot(equippedGun.shootSound);
         
         for (int i = 0; i < equippedGun.pellets; i++)
         {
@@ -194,9 +200,16 @@ public class Hands : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray.origin, ray.direction + new Vector3(x, y, 0), out hit))
             {
+                Enemy enemy = hit.collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(equippedGun.damage);
+                }
+
                 gunImpact.transform.position = hit.point;
                 gunImpact.transform.forward = hit.normal;
                 gunImpact.Emit(1);
+
 
                 SpawnBulletHole(hit, ray);
             }

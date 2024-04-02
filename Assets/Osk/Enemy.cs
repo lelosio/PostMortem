@@ -4,8 +4,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public SpriteRenderer enemyRenderer;
-    public Transform player;
+    private GameObject player;
     private NavMeshAgent enemy;
 
     public float shootInterval = 1f;
@@ -18,14 +17,12 @@ public class Enemy : MonoBehaviour
     public float timeBetweenShots = 1f;
     private float lastShotTime;
     public float maxDistanceToPlayer = 10f;
-    public ParticleSystem muzzleFlash;
 
     private PlayerMovement playerScript;
 
     private void Start()
     {
-        enemyRenderer = GetComponent<SpriteRenderer>();
-        player = FindFirstObjectByType<PlayerMovement>().transform;
+        player = GameObject.FindWithTag("Player");
         playerScript = FindFirstObjectByType<PlayerMovement>();
         enemy = GetComponent<NavMeshAgent>();
 
@@ -35,13 +32,13 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        enemy.SetDestination(player.position);
+        enemy.SetDestination(player.transform.position);
         if (enemyHealth <= 0)
         {
             Destroy(gameObject);
         }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= maxDistanceToPlayer && Time.time - lastShootTime >= shootInterval && Time.time - lastShotTime >= timeBetweenShots)
         {
             ShootAtPlayer();
@@ -52,19 +49,19 @@ public class Enemy : MonoBehaviour
     private void ShootAtPlayer()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, (player.position - transform.position).normalized, out hit))
+        if (Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized, out hit))
         {
             if (hit.collider.CompareTag("Player"))
             {
-                // playerScript.TakeDamage(damage);
-                lastShotTime = Time.time; 
+                playerScript.TakeDamage(damage);
+                lastShotTime = Time.time;
             }
         }
-        muzzleFlash.Play();
     }
 
     public void TakeDamage(float damage)
     {
         enemyHealth -= damage;
+        
     }
 }
