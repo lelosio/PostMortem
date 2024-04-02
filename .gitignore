@@ -43,6 +43,9 @@ sysinfo.txt
 .bak
 .BAK
 
+# Rest
+*.rar
+
 ### FMOD Unity Integration ###
 # Never ignore DLLs in the FMOD subfolder, so make sure that the FMOD-folder is in the correct path.
 !/[Aa]ssets/Plugins/FMOD/**/*.dll
