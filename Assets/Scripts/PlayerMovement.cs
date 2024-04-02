@@ -1,5 +1,6 @@
 using UnityEngine;
 using FMODUnity;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     public float Health = 10f;
     public GameObject panel;
     public SpriteRenderer bloodOverlay;
+    public TextMeshProUGUI healthText;
 
     void Start()
     {
@@ -136,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         float newOpacity = 1f - (Health / 100);
 
         bloodOverlay.SetSpriteTransparency(Mathf.Lerp(bloodOverlay.color.a, newOpacity, Time.deltaTime * 5f));
+        healthText.text = Health.ToString();
     }
 
     public void Die()

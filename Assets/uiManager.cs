@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     public void Button()
     {
-        SceneManager.LoadScene("gra");
+        // replace with object reference
+        SceneManager.LoadScene("1");
     }
 }
