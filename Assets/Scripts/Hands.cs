@@ -1,9 +1,8 @@
 using UnityEditor.Animations;
 using UnityEngine;
 using TMPro;
-using FMOD;
 using FMODUnity;
-using FMOD.Studio;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class Hands : MonoBehaviour
 {
@@ -41,6 +40,7 @@ public class Hands : MonoBehaviour
     public TextMeshProUGUI ammoUI;
     bool reloading;
     bool readyToShoot;
+    public UIManager uim;
 
     public class Gun
     {
@@ -75,10 +75,10 @@ public class Hands : MonoBehaviour
     
     void Start()
     {
-        Gun pistol = new Gun("Pistol", 24, 12, 0f, 0.25f, 1f, pistolAnim, true);
-        Gun shotgun = new Gun("Shotgun", 10, 3, 0.1f, 0.5f, 0.3f, shotgunAnim, true, 6);
+        Gun pistol = new Gun("Pistol", 24, 12, 0f, 0.25f, 0.2f, pistolAnim, true);
+        Gun shotgun = new Gun("Shotgun", 10, 3, 0.1f, 0.5f, 0.5f, shotgunAnim, true, 6);
         Gun submachineGun = new Gun("Pistol", 300, 12, 1.2f, 0.5f, 1f, null, false);
-        Gun machineGun = new Gun("Pistol", 400, 12, 1.2f, 0.5f, 1f, null, true);
+        Gun machineGun = new Gun("Pistol", 400, 12, 1.2f, 0.5f, 1f, null, false);
 
         Inventory[0] = pistol;
         Inventory[1] = shotgun;
@@ -102,11 +102,18 @@ public class Hands : MonoBehaviour
         // targetPosition += new Vector3(1000f,1000f, 10f);    SUPPOSED TO BE IN SHOOT METHOD
         #endregion
 
+        if (equippedGun != Inventory[selectedGun])
+        {
+            // set opacity value to X
+        }
+            // lerp opacity, value x, time
+            // maybe add some invoke function if the selected gun changed to start lerping after that so there's a delay
+
+        equippedGun = Inventory[selectedGun];
         if (Input.GetKeyDown(KeyCode.Alpha1) && Inventory[0].acquired) selectedGun = 0;
         if (Input.GetKeyDown(KeyCode.Alpha2) && Inventory[1].acquired) selectedGun = 1;
         if (Input.GetKeyDown(KeyCode.Alpha3) && Inventory[2].acquired) selectedGun = 2;
         if (Input.GetKeyDown(KeyCode.Alpha4) && Inventory[3].acquired) selectedGun = 3;
-        equippedGun = Inventory[selectedGun];
         int nextSelectedGun = selectedGun + (int)Input.mouseScrollDelta.y;
         if (nextSelectedGun < 0) {
             nextSelectedGun = Inventory.Length - 1;
@@ -123,6 +130,17 @@ public class Hands : MonoBehaviour
             }
         }
     
+        for(int i = 0; i < selectedGun; i++ )
+        {
+            if (Inventory[i].acquired)
+            {
+                uim.slot[i].sprite = uim.slotSprite[1];
+            }
+            else
+            {
+                uim.slot[i].sprite = uim.slotSprite[0];
+            }
+        }
 
         selectedGun = nextSelectedGun;
 
@@ -150,7 +168,7 @@ public class Hands : MonoBehaviour
         muzzleFlashLight.intensity = Mathf.Lerp(lightIntensity,0f, Time.deltaTime * 10f);
         muzzleFlashFlash.intensity = Mathf.Lerp(flashIntensity,0f, Time.deltaTime * 15f);
 
-        ammoUI.SetText(equippedGun.bulletsLeft + "/" + equippedGun.ammo);
+        uim.ammo.text = $"{equippedGun.bulletsLeft}<color=#d9d9d9><size=60%>/{equippedGun.ammo}<br>{equippedGun.name}";
     }
 
     void Shoot()
