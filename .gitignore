@@ -14,6 +14,7 @@
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 .vs/
+.vscode/
 .consulo/
 .gradle/
 
@@ -63,8 +64,7 @@ UpgradeLog.htm
 fmod.log
 fmod_editor.log
 
-
-/Assets/Plugins/FMOD/platforms/**/lib/
-!/Assets/Plugins/FMOD/platforms/win/lib/
-/Assets/Plugins/FMOD/platforms/**/lib.meta
 !/Assets/Plugins/FMOD/platforms/win/lib.meta
+!/Assets/Plugins/FMOD/platforms/win/lib/
+/Assets/Plugins/FMOD/platforms/**/lib/
+/Assets/Plugins/FMOD/platforms/**/lib.meta
