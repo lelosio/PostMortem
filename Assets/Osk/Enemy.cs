@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public float raycastSpreadAngle = 10f;
 
     public float enemyHealth = 5f;
-    public float damage = 10f;
+    public int damage = 25;
 
     public float timeBetweenShots = 1f;
     private float lastShotTime;

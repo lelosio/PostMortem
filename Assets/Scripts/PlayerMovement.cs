@@ -41,6 +41,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject panel;
     public SpriteRenderer bloodOverlay;
     public TextMeshProUGUI healthText;
+    public int curHealth;
+    public int maxHealth;
+    public HealthBar healthBar;
 
     void Start()
     {
@@ -130,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        if(Health <= 0)
+        if(curHealth <= 0)
         {
             Die();
         }
@@ -138,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
         float newOpacity = 1f - (Health / 100);
 
         bloodOverlay.SetSpriteTransparency(Mathf.Lerp(bloodOverlay.color.a, newOpacity, Time.deltaTime * 5f));
-        healthText.text = Health.ToString();
+        healthText.text = curHealth.ToString();
     }
 
     public void Die()
@@ -149,8 +152,9 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage(int damageAmount)
     {
-        Health -= damageAmount;
+        curHealth -= damageAmount;
+        healthBar.SetHealth(curHealth);
     }
 }
