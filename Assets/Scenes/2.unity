@@ -14966,6 +14966,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -13.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2804856044175273860, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_ShadowCastingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804856044175273860, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804856044175273860, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_EnableHeightmapRayTracing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5175881204166998905, guid: cff999586f31e3e4489987c9766e346b,
         type: 3}
       propertyPath: m_IsActive
@@ -15026,10 +15041,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5407529403161131068, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407529403161131068, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_EnableHeightmapRayTracing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6742635673904551981, guid: cff999586f31e3e4489987c9766e346b,
         type: 3}
       propertyPath: m_Name
       value: Enviroment Cala Scena
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380425138530336536, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_DrawInstanced
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380425138530336536, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380425138530336536, guid: cff999586f31e3e4489987c9766e346b,
+        type: 3}
+      propertyPath: m_EnableHeightmapRayTracing
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
