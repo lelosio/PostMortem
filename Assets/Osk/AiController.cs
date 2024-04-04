@@ -55,7 +55,7 @@ public class AiController : MonoBehaviour
     {
         EnviromentView();
 
-        if(!m_IsPatrol) 
+        if (!m_IsPatrol)
         {
             Chasing();
         }
@@ -69,14 +69,14 @@ public class AiController : MonoBehaviour
         m_PlayerNear = false;
         playerLastPosition = Vector3.zero;
 
-        if(!m_CaughtPlayer)
+        if (!m_CaughtPlayer)
         {
             Move(speedRun);
             navMeshAgent.SetDestination(m_PlayerPosition);
         }
-        if(navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
-            if(m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
+            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
             {
                 m_IsPatrol = true;
                 m_PlayerNear = false;
@@ -87,21 +87,21 @@ public class AiController : MonoBehaviour
             }
             else
             {
-                if(Vector3.Distance(transform.position,GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
+                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
                 {
                     Stop();
                     m_WaitTime -= Time.deltaTime;
                 }
             }
-            
+
         }
 
     }
     private void Patroling()
     {
-        if(m_PlayerNear)
+        if (m_PlayerNear)
         {
-            if(m_TimeToRotate <= 0)
+            if (m_TimeToRotate <= 0)
             {
                 Move(speedWalk);
                 LookingPlayer(playerLastPosition);
@@ -117,9 +117,9 @@ public class AiController : MonoBehaviour
             m_PlayerNear = false;
             playerLastPosition = Vector3.zero;
             navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-            if(navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
-                if(m_WaitTime <= 0)
+                if (m_WaitTime <= 0)
                 {
                     NextPoint();
                     Move(speedWalk);
