@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
             Die();
         }
         
-        float newOpacity = 1f - (Health / 100);
+        float newOpacity = 1f - (curHealth / 100);
 
         bloodOverlay.SetSpriteTransparency(Mathf.Lerp(bloodOverlay.color.a, newOpacity, Time.deltaTime * 5f));
         healthText.text = curHealth.ToString();
