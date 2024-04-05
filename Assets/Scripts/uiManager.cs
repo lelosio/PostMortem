@@ -5,23 +5,23 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI ammo;
-    public Image[] slot;
-    public Sprite[] slotSprite;
-    public Transform inventory;
+	public TextMeshProUGUI ammo;
+	public Image[] slot;
+	public Sprite[] slotSprite;
+	public Transform inventory;
 
-    public void Start()
-    {
-        ammo.richText = true;
-    }
+	public void Start()
+	{
+		ammo.richText = true;
+	}
 
-    public void Update()
-    {
-    }
+	public void Update()
+	{
+	}
 
-    public void Button()
-    {
-        // replace with object reference
-        SceneManager.LoadScene("1");
-    }
+	public void Button()
+	{
+		// replace with object reference
+		SceneManager.LoadScene("1");
+	}
 }
