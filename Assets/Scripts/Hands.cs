@@ -269,5 +269,4 @@ public class Hands : MonoBehaviour
 		}
 		reloading = false;
 	}
-
 }
