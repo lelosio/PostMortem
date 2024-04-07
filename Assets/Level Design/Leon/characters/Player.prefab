@@ -295,6 +295,7 @@ MonoBehaviour:
   panel: {fileID: 0}
   bloodOverlay: {fileID: 0}
   healthText: {fileID: 0}
-  curHealth: 0
-  maxHealth: 0
-  healthBar: {fileID: 0}
+  curHealth: 100
+  maxHealth: 100
+  healthBar: {fileID: 2678309674626974093, guid: 69aa88391bc0f93409ac43931cad757a,
+    type: 3}
